@@ -1,0 +1,173 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>ChaChing</title>
+    <link type="text/css" href="menu.css" rel="stylesheet" />
+    <style type="text/css" title="currentStyle">
+	
+			@import "demo_table.css";
+	</style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="menu.js"></script>
+    <script type="text/javascript" src="jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function()
+		{
+			var oTable = $('#products').dataTable( {
+				"bProcessing": true,
+				"sAjaxSource": "products.txt",
+				} );
+		} )
+		
+</script>
+
+    <script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			var oTable = $('#order').dataTable( {
+				"bProcessing": true,
+				"sAjaxSource": "order.txt"
+			} );
+		} );
+	</script>
+<script type="text/javascript">
+function loadXMLDoc(){
+	//$.ajax({
+  	//url: "http://joelchristner.dnsalias.com:65533",
+  	//'beforeSend' : function(xhr) {          
+	//	xhr.setRequestHeader("Authorization", "Basic");
+	//},
+	//data: "{}",
+  	//contentType: "application/json; charset=utf-8",
+  	//dataType: "json",
+  	//success: function(msg) {
+    // Do interesting things here.
+  	//}
+//});
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","http://joelchristner.dnsalias.com:65533",true);
+	xmlhttp.setRequestHeader('content-type','application/json');
+	xmlhttp.setRequestHeader('x-chaching-encoding','application/json');
+	xmlhttp.setRequestHeader('x-chaching-email','ssnacks@gmail.com');
+	xmlhttp.setRequestHeader('x-chaching-password','p@ssw0rd');
+	xmlhttp.setRequestHeader('x-chaching-command','a_login');
+	xmlhttp.setRequestHeader('x-chaching-device_id','1');
+	xmlhttp.setRequestHeader('x-chaching-client_version','0.0.1');
+	xmlhttp.send();
+	alert(xmlhttp.getAllResponseHeaders());
+	}
+</script>
+</head>
+<body>
+<button type="button" onClick="loadXMLDoc()">Request data</button>
+
+<style type="text/css">
+* { margin:0;
+    padding:0;
+}
+body { 
+	background:rgb(74,81,85);
+	font-family:'Trebuchet MS';
+	font-size: 12px;
+	color:#E5E5E5;
+	}
+div#container {
+	margin: 0 auto;
+	width: 100%;
+}
+div#leftmenu {
+	clear: left;
+	float: left;
+	width: 45%;
+	padding: 20px 0;
+	margin: 0 0 0 4%;
+	display: inline;
+}
+div#rightmenu {
+	float: right;
+	width: 45%;
+	padding: 20px 0;
+	margin: 0 3% 0 0;
+	display: inline;
+}
+div#menu { margin:5px auto; }
+div#copyright {
+    font:11px 'Trebuchet MS';
+    text-indent:30px;
+    padding:40px 0 0 0;
+	display:none;
+	
+	}
+div#copyright a { color:#aaa; }
+div#copyright a:hover { color:#222; }
+</style>
+
+
+<div id="menu">
+    <ul class="menu">
+        <li><a href="#" class="parent"><span>Dashboard</span></a>
+
+        </li>
+        <li><a href="#" class="parent"><span>Sell</span></a>
+            <ul>
+                <li><a href="#" class="parent"><span>Place Order</span></a></li>
+                <li><a href="#" class="parent"><span>View Order</span></a>
+                <li><a href="#" class="parent"><span>Manage Payments</span></a>
+                <li><a href="#"><span>Recall Saved Orders</span></a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="parent"><span>Manage</span></a>
+            <ul>
+                <li><a href="#" class="parent"><span>Companies</span></a></li>
+                <li><a href="#" class="parent"><span>Locations</span></a>
+                <li><a href="#" class="parent"><span>Users</span></a>
+            </ul>
+        <li><a href="#"><span>Reports</span></a></li>
+        <li class="last"><a href="#"><span>Help</span></a></li>
+    </ul>
+</div>
+<div id="container">
+	<div id="leftmenu">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="order">
+		<thead>
+			<tr>
+				<th width="20%">Rendering engine</th>
+				<th width="25%">Browser</th>
+				<th width="25%">Platform(s)</th>
+				<th width="15%">Engine version</th>
+				<th width="15%">CSS grade</th>
+			</tr>
+		</thead>
+
+	</table>
+    </div>
+    <div id="rightmenu">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="products">
+		<thead>
+			<tr>
+				<th width="20%">Rendering engine</th>
+				<th width="25%">Browser</th>
+				<th width="25%">Platform(s)</th>
+				<th width="15%">Engine version</th>
+				<th width="15%">CSS grade</th>
+			</tr>
+		</thead>
+	</table>
+<div id="copyright">Copyright &copy; 2011 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
+</div>
+
+
+
+<script>
+$('#rightmenu').delegate('tr', 'click', function() {
+  var firstCellText = $("td:first", this).text();
+  var secondCellText = $("td:eq(1)", this).text();
+  var thirdCellText = $("td:eq(2)", this).text();
+  var fourthCellText = $("td:eq(3)", this).text();
+  alert('User clicked on ' + firstCellText + ' ' + secondCellText + ' ' + thirdCellText + ' ' + fourthCellText);
+});
+
+</script> 
+</body>
+</html>

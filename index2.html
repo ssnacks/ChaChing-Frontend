@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>ChaChing</title>
+    <link href="jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="menu.css" rel="stylesheet" />
+    <style type="text/css" title="currentStyle"> @import "demo_table.css"; </style>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="menu.js"></script>
+    <script type="text/javascript" src="jquery.dataTables.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery-ui-1.8.16.custom.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+	var oTable;
+
+/* Global var for counter */
+var giCount = 2;
+
+$(document).ready(function() {
+	oTable = $('#order').dataTable();
+	fnClickAddRow("","Total",total);
+} );
+
+function fnClickAddRow(a,b,c) {
+	oTable.fnAddData( [
+		a,
+		b,
+		c ] );
+	
+	giCount++;
+}
+	</script>
+    <script type="text/javascript" charset="utf-8">
+		var my_json;
+		$.getJSON('./products.txt', function(json) {
+  			my_json = json;
+			}); 
+	</script>
+
+	<script>
+	$(function() {
+		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+		$( "#dialog:ui-dialog" ).dialog( "destroy" );
+		
+		var name = $( "#name" ),
+			email = $( "#email" ),
+			password = $( "#password" ),
+			allFields = $( [] ).add( name ).add( email ).add( password ),
+			tips = $( ".validateTips" );
+
+		function updateTips( t ) {
+			tips
+				.text( t )
+				.addClass( "ui-state-highlight" );
+			setTimeout(function() {
+				tips.removeClass( "ui-state-highlight", 1500 );
+			}, 500 );
+		}
+
+		function checkLength( o, n, min, max ) {
+			if ( o.val().length > max || o.val().length < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( "Length of " + n + " must be between " +
+					min + " and " + max + "." );
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		function checkRegexp( o, regexp, n ) {
+			if ( !( regexp.test( o.val() ) ) ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n );
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 300,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Cash": function() {
+					var bValid = true;
+					allFields.removeClass( "ui-state-error" );
+					},
+				"Credit": function() {
+				},
+				"eCheck": function() {
+				},
+				"PrePay": function() {
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			},
+			close: function() {
+				allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+
+		$( "#create-user" )
+			.button()
+			.click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+			});
+	});
+	</script>
+    
+<script type="text/javascript">
+function loadXMLDoc(){
+	//$.ajax({
+  	//url: "http://joelchristner.dnsalias.com:65533",
+  	//'beforeSend' : function(xhr) {          
+	//	xhr.setRequestHeader("Authorization", "Basic");
+	//},
+	//data: "{}",
+  	//contentType: "application/json; charset=utf-8",
+  	//dataType: "json",
+  	//success: function(msg) {
+    // Do interesting things here.
+  	//}
+//});
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","http://joelchristner.dnsalias.com:65533&callback=?",true);
+	xmlhttp.setRequestHeader('x-chaching-encoding','application/json');
+	xmlhttp.setRequestHeader('x-chaching-email','ssnacks@gmail.com');
+	xmlhttp.setRequestHeader('x-chaching-password','p@ssw0rd');
+	xmlhttp.setRequestHeader('x-chaching-command','a_login');
+	xmlhttp.setRequestHeader('x-chaching-device_id','1');
+	xmlhttp.send('{}');
+	}
+</script>
+  <script>
+  $(document).ready(function() {
+    $("#accordion").accordion();
+  });
+  </script>
+  <link type="text/css" href="main.css" rel="stylesheet" />
+    <script>
+	var order = [0,0,0,0,0];
+	var ordercost = [1.00,2.00,2.25,2.50,3.00];
+	var total = 0;
+	var itemnames = ["Drip","Latte","Mocha","Espresso","Cappucino"];
+	function additem(itemnumber) {
+		if(order[itemnumber]==0){
+			fnClickAddRow(1,itemnames[itemnumber],ordercost[itemnumber]);
+			total = total + ordercost[itemnumber];
+		}
+		else{
+			oTable.fnUpdate( [order[itemnumber],itemnames[itemnumber],order[itemnumber]*ordercost[itemnumber]], 0, 0 );
+		}
+		order[itemnumber] = order[itemnumber] + 1;
+		oTable.fnUpdate( ['','Total',total], 0, 0 ); /* Row */
+	}
+	</script>
+</head>
+<body>
+<div id="menu">
+    <ul class="menu">
+        <li><a href="#" class="parent"><span>Dashboard</span></a>
+
+        </li>
+        <li><a href="#" class="parent"><span>Sell</span></a>
+            <ul>
+                <li><a href="#" class="parent"><span>Place Order</span></a></li>
+                <li><a href="#" class="parent"><span>View Order</span></a>
+                <li><a href="#" class="parent"><span>Manage Payments</span></a>
+                <li><a href="#"><span>Recall Saved Orders</span></a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="parent"><span>Manage</span></a>
+            <ul>
+                <li><a href="#" class="parent"><span>Companies</span></a></li>
+                <li><a href="#" class="parent"><span>Locations</span></a>
+                <li><a href="#" class="parent"><span>Users</span></a>
+            </ul>
+        <li><a href="#"><span>Reports</span></a></li>
+        <li class="last"><a href="#"><span>Help</span></a></li>
+    </ul>
+</div>
+<div id="container">
+	<div id="leftmenu">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="order">
+		<thead>
+			<tr>
+				<th width="10%">Qty</th>
+				<th width="70%">Item</th>
+				<th width="20%">Cost</th>
+			</tr>
+		</thead>
+	</table>
+    <button draggable="true" id="create-user" title="Button" class="btn">Pay</button>
+
+    </div>
+    <div id="rightmenu">
+<div id="accordion">
+	<h3><a href="#">Coffee</a></h3>
+	<div id="coffee">
+		<button draggable="true" title="Button" class="btn" onClick="additem(0)">Drip</button>
+		<button draggable="true" title="Button" class="btn" onClick="additem(1)">Latte</button>
+		<button draggable="true" title="Button" class="btn" onClick="additem(2)">Mocha</button>
+		<button draggable="true" title="Button" class="btn" onClick="additem(3)">Espresso</button>
+		<button draggable="true" title="Button" class="btn" onClick="additem(4)">Cappacino</button>
+	</div>
+	<h3><a href="#">Tea</a></h3>
+	<div>
+		<button draggable="true" title="Button" class="btn">Lemon</button>
+		<button draggable="true" title="Button" class="btn">Blossom</button>
+		<button draggable="true" title="Button" class="btn">Camomile</button>
+		<button draggable="true" title="Button" class="btn">Green</button>
+		<button draggable="true" title="Button" class="btn">Oolong</button>
+		<button draggable="true" title="Button" class="btn">Mate</button>
+		<button draggable="true" title="Button" class="btn">White</button>
+		<button draggable="true" title="Button" class="btn">Orange</button>
+		<button draggable="true" title="Button" class="btn">Rooibos</button>
+		<button draggable="true" title="Button" class="btn">Peach</button>
+	</div>
+	<h3><a href="#">Pastry</a></h3>
+	<div>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+	</div>
+	<h3><a href="#">Sandwich</a></h3>
+	<div>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+		<button draggable="true" title="Button" class="btn">Button</button>
+	</div>
+</div>
+</div>
+<div class="demo">
+
+<div id="dialog-form" title="Pay">
+	<p class="validateTips">Enter the payment method</p>
+
+	<form>
+	<fieldset>
+		<label for="amount">Amount</label>
+		<input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+</div>
+<div id="copyright">Copyright &copy; 2011 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* CSS Document */
+
+* { margin:0;
+    padding:0;
+}
+body { 
+	background:rgb(74,81,85);
+	font-family:'Trebuchet MS';
+	font-size: 12px;
+	color:#E5E5E5;
+	}
+div#container {
+	margin: 0 auto;
+	width: 100%;
+}
+div#leftmenu {
+	clear: left;
+	float: left;
+	width: 30%;
+	padding: 20px 0;
+	margin: 0 0 0 2%;
+	display: inline;
+}
+div#rightmenu {
+	float: right;
+	width: 59%;
+	padding: 20px 0;
+	margin: 0 2% 0 0;
+	display: inline;
+}
+div#menu { margin:5px auto; }
+div#copyright {
+    font:11px 'Trebuchet MS';
+    text-indent:30px;
+    padding:40px 0 0 0;
+	display:none;
+	
+	}
+div#copyright a { color:#aaa; }
+div#copyright a:hover { color:#222; }
+
+/* The *normal* state styling */
+.btn{
+background-image:linear-gradient(-90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.2));
+	background-image:-webkit-gradient(linear, left top, left bottom,color-stop(0%, rgba(255, 255, 255, 0.95)), color-stop(100%, rgba(255, 255, 255, 0.2)));
+	background-image:-moz-linear-gradient(-90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.2));
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#95ffffff', EndColorStr='#20ffffff');
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#95ffffff', EndColorStr='#20ffffff')";
+	background-color:rgb(51, 51, 51);
+	width:100px;
+	height:100px;
+	border:1px solid rgb(102, 102, 102);
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	padding:10px 20px;
+	box-shadow:0px 0px 0px rgb(255, 255, 255);
+	-moz-box-shadow:0px 0px 0px rgb(255, 255, 255);
+	-webkit-box-shadow:0px 0px 0px rgb(255, 255, 255);
+	font-size:12px;
+	font-weight:normal;
+	color:rgb(255, 255, 255);
+	text-shadow:1px 1px 1px rgb(0, 0, 0);
+}
+/* The *hover* state styling */
+.btn:hover{
+	background-image:linear-gradient(-90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+	background-image:-webkit-gradient(linear, left top, left bottom,color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.2)));
+	background-image:-moz-linear-gradient(-90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#80ffffff', EndColorStr='#20ffffff');
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#80ffffff', EndColorStr='#20ffffff')";
+}
+
+/* The *active* state styling */
+.btn:active,.btn:focus{
+}
